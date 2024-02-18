@@ -1,24 +1,112 @@
 <!-- templates/results.html -->
 
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Medicine Results</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Medicine Results</h1>-->
+<!--    {% if drugs %}-->
+<!--        <ul>-->
+<!--            {% for drug in drugs %}-->
+<!--                <li>{{ drug }}</li>-->
+<!--            {% endfor %}-->
+<!--        </ul>-->
+<!--    {% else %}-->
+<!--        <p>No medicines found for the given conclusion.</p>-->
+<!--    {% endif %}-->
+<!--    <a href="/">Search again</a>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicine Results</title>
+    <title>Medy Assistant - Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #EAF6F6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-container {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%; /* Adjust width as necessary */
+            max-width: 600px; /* Adjust max-width as necessary */
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        ul {
+            list-style: none; /* Removes default list styles */
+            padding-left: 0; /* Aligns with the rest of the content */
+        }
+
+        ul li {
+            background-color: #F0F0F0; /* Light grey background */
+            margin: 5px 0; /* Spacing between list items */
+            padding: 10px; /* Padding within list items */
+            border-radius: 5px; /* Rounded corners for list items */
+        }
+
+        .footer {
+            color: #888;
+            font-size: 0.9em;
+
+            bottom: 10px; /* Distance from the bottom */
+            width: 100%; /* Full width */
+        }
+
+        .spectra {
+            color: #8E44AD;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Medicine Results</h1>
-    {% if drugs %}
+    <div class="main-container">
+        <h1>Medy Assistant</h1>
+        <p class="tagline">Suggested medicine</p>
+         {% if drugs %}
         <ul>
             {% for drug in drugs %}
                 <li>{{ drug }}</li>
             {% endfor %}
         </ul>
-    {% else %}
-        <p>No medicines found for the given conclusion.</p>
-    {% endif %}
-    <a href="/">Search again</a>
+        {% else %}
+            <p>No medicines found for the given conclusion.</p>
+        {% endif %}
+        <a href="/">Search again</a><br><br>
+        <div class="footer">
+            Powered by <span class="spectra">Spectra</span>
+        </div>
+    </div>
 </body>
 </html>
+
