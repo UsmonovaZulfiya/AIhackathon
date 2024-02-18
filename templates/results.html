@@ -1,0 +1,24 @@
+<!-- templates/results.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Results</title>
+</head>
+<body>
+    <h1>Medicine Results</h1>
+    {% if drugs %}
+        <ul>
+            {% for drug in drugs %}
+                <li>{{ drug }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No medicines found for the given conclusion.</p>
+    {% endif %}
+    <a href="/">Search again</a>
+</body>
+</html>
