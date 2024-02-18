@@ -52,7 +52,7 @@ medical_conditions = dataset1['medical_condition']
 #     else:
 #         return suggested_medications_list
 
-onehot_encoder = OneHotEncoder()
+onehot_encoder = OneHotEncoder(handle_unknown='ignore')
 
 conclusions_reshaped = conclusions.values.reshape(-1, 1)
 encoded_features_sparse = onehot_encoder.fit_transform(conclusions_reshaped)
@@ -66,9 +66,26 @@ model = MultinomialNB()
 model.fit(encoded_features, encoded_labels)
 
 
+# def predict_model(input_text):
+#     cleaned_input = clean_text(input_text)
+#     input_encoded = onehot_encoder.transform([[cleaned_input]])
+#
+#     predicted_condition_label = model.predict(input_encoded)
+#     predicted_condition = label_encoder.inverse_transform(predicted_condition_label)
+#
+#     suggested_medications = dataset2[dataset2['medical_condition'] == predicted_condition[0]]['drug_name']
+#     suggested_medications_list = suggested_medications.tolist()
+#
+#     return suggested_medications_list
+
 def predict_model(input_text):
     cleaned_input = clean_text(input_text)
     input_encoded = onehot_encoder.transform([[cleaned_input]])
+
+    # Check if the encoded input has no active features (all zeros)
+    if not input_encoded.toarray().any():
+        # Return a list with a single message string instead of just a string
+        return ["Input not recognized or not in training data"]
 
     predicted_condition_label = model.predict(input_encoded)
     predicted_condition = label_encoder.inverse_transform(predicted_condition_label)
@@ -77,6 +94,8 @@ def predict_model(input_text):
     suggested_medications_list = suggested_medications.tolist()
 
     return suggested_medications_list
+
+
 
 
 
@@ -99,11 +118,11 @@ if __name__ == '__main__':
 
 
 #def get_drug_names_for_conclusion(conclusion, dataset1, dataset2):
-# medical_conditions = dataset1[dataset1['conclusion'].str.lower() == conclusion.lower()][
-#     'medical_condition'].tolist()
-# if not medical_conditions:
-#     return "No matching medical condition found for the given conclusion."
-#
-# drugs = dataset2[dataset2['medical_condition'].isin(medical_conditions)]['drug_name'].tolist()
-#
-# return drugs
+    # medical_conditions = dataset1[dataset1['conclusion'].str.lower() == conclusion.lower()][
+    #     'medical_condition'].tolist()
+    # if not medical_conditions:
+    #     return "No matching medical condition found for the given conclusion."
+    #
+    # drugs = dataset2[dataset2['medical_condition'].isin(medical_conditions)]['drug_name'].tolist()
+    #
+    # return drugs
