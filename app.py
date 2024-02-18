@@ -78,15 +78,7 @@ def predict_model(input_text):
 
     return suggested_medications_list
 
-def get_drug_names_for_conclusion(conclusion, dataset1, dataset2):
-    medical_conditions = dataset1[dataset1['conclusion'].str.lower() == conclusion.lower()][
-        'medical_condition'].tolist()
-    if not medical_conditions:
-        return "No matching medical condition found for the given conclusion."
 
-    drugs = dataset2[dataset2['medical_condition'].isin(medical_conditions)]['drug_name'].tolist()
-
-    return drugs
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -103,3 +95,15 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+#def get_drug_names_for_conclusion(conclusion, dataset1, dataset2):
+# medical_conditions = dataset1[dataset1['conclusion'].str.lower() == conclusion.lower()][
+#     'medical_condition'].tolist()
+# if not medical_conditions:
+#     return "No matching medical condition found for the given conclusion."
+#
+# drugs = dataset2[dataset2['medical_condition'].isin(medical_conditions)]['drug_name'].tolist()
+#
+# return drugs
